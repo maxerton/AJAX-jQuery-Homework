@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form class="form">
+    <h4>Search:</h4>
+    <div class="form__content">
+      <div class="inp-group">
+        <label for="">Title:</label>
+        <input type="text" data-name="title">
+      </div>
+      <div class="inp-group">
+        <label for="">Type:</label>
+        <select data-name="type">
+          <option value="movie">Movie</option>
+          <option value="series">Series</option>
+          <option value="episode">Episode</option>
+        </select>
+      </div>
+
+      <button type="submit">Search</button>
+
+    </div>
+  </form>
+
+  <div class="films">
+    <h4>Films:</h4>
+    <div class="films__content">
+      
+    </div>
+    <ul class="paginator">
+      <li data-func="prev"><<</li>
+      <li data-func="num">1</li>
+      <li data-func="next">>></li>
+    </ul>
+  </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="script.js"></script>
+</html>
