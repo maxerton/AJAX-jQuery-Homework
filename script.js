@@ -43,37 +43,71 @@ class Films {
   requested(page = 1) {
     console.log(1);
     const _this = this;
-    $.ajax({
-      type: "get",
-      url: 'http://www.omdbapi.com/',
-      data: {
-        apikey: this.#key,
-        s: this.titleSearch.value,
-        type: this.selectSearch.value,
-        page: page
-      },
-      success: function (response) {
-        _this.successReq(response);
-      }
-    });
+    const apiPromise = fetch(`http://www.omdbapi.com/?
+    apikey=${this.#key}&
+    s=${this.titleSearch.value}&
+    type=${this.selectSearch.value}&
+    page=${page}`);
+
+    apiPromise
+      .then(resp => {
+        if (resp.ok && resp.status < 400) {
+          return resp.json();
+        }
+        throw '400+'
+      })
+      .then(resp => {
+        _this.successReq(resp);
+      })
+      .catch((err) => {console.log(err)});
+    // $.ajax({
+    //   type: "get",
+    //   url: 'http://www.omdbapi.com/',
+    //   data: {
+    //     apikey: this.#key,
+    //     s: this.titleSearch.value,
+    //     type: this.selectSearch.value,
+    //     page: page
+    //   },
+    //   success: function (response) {
+    //     _this.successReq(response);
+    //   }
+    // });
   }
 
 
   requestFilm(id) {
     console.log(1);
     const _this = this;
-    $.ajax({
-      type: "get",
-      url: 'http://www.omdbapi.com/',
-      data: {
-        apikey: this.#key,
-        i: id,
-        plot: 'full'
-      },
-      success: function (response) {
-        _this.renderInfo(response)
-      }
-    });
+    const apiPromise = fetch(`http://www.omdbapi.com/?
+    apikey=${this.#key}&
+    i=${id}&
+    plot=full`);
+
+    apiPromise
+      .then(resp => {
+        if (resp.ok && resp.status < 400) {
+          return resp.json();
+        }
+        throw '400+'
+      })
+      .then(resp => {
+        _this.renderInfo(resp);
+      })
+      .catch((err) => {console.log(err)});
+
+    // $.ajax({
+    //   type: "get",
+    //   url: 'http://www.omdbapi.com/',
+    //   data: {
+    //     apikey: this.#key,
+    //     i: id,
+    //     plot: 'full'
+    //   },
+    //   success: function (response) {
+    //     _this.renderInfo(response)
+    //   }
+    // });
   }
 
   successReq(response) {
@@ -179,8 +213,7 @@ class Films {
     this.paginator.addEventListener('click', this.paginatorService.bind(this));
   }
 }
-$(document).ready(function () {
-  const films = new Films(document.querySelector('form.form'), document.querySelector('.films'), document.querySelector('.film-details'));
-  films.init();
-})
+
+const films = new Films(document.querySelector('form.form'), document.querySelector('.films'), document.querySelector('.film-details'));
+films.init();
 
