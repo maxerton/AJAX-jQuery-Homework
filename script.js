@@ -43,11 +43,7 @@ class Films {
   requested(page = 1) {
     console.log(1);
     const _this = this;
-    const apiPromise = fetch(`http://www.omdbapi.com/?
-    apikey=${this.#key}&
-    s=${this.titleSearch.value}&
-    type=${this.selectSearch.value}&
-    page=${page}`);
+    const apiPromise = fetch(`http://www.omdbapi.com/?apikey=${this.#key}&s=${this.titleSearch.value}&type=${this.selectSearch.value}&page=${page}`);
 
     apiPromise
       .then(resp => {
@@ -79,10 +75,7 @@ class Films {
   requestFilm(id) {
     console.log(1);
     const _this = this;
-    const apiPromise = fetch(`http://www.omdbapi.com/?
-    apikey=${this.#key}&
-    i=${id}&
-    plot=full`);
+    const apiPromise = fetch(`http://www.omdbapi.com/?apikey=${this.#key}&i=${id}&plot=full`);
 
     apiPromise
       .then(resp => {
